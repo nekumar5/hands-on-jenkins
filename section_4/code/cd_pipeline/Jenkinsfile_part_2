@@ -9,6 +9,8 @@ pipeline {
 
 	environment {
 		PYTHONPATH = "${WORKSPACE}/section_4/code/cd_pipeline"
+		HTTP_PROXY = "http://proxy-wsa.esl.cisco.com:80"
+                HTTPS_PROXY = "http://proxy-wsa.esl.cisco.com:80"
 	}
 
 	stages {
@@ -72,8 +74,6 @@ def deploy(environment) {
 
 
 def runUnittests() {
-	sh "export http_proxy=http://proxy-wsa.esl.cisco.com:80"
-        sh "export https_proxy=http://proxy-wsa.esl.cisco.com:80"
 	sh "pip3 install --no-cache-dir -r ./section_4/code/cd_pipeline/requirements.txt"
 	sh "python3 section_4/code/cd_pipeline/tests/test_flask_app.py"
 }
